@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligências Artificiais Disponíveis em 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            outline: none;
+            display: block;
+        }
+        .search-box:focus {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .filter-btn {
+            background: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .filter-btn:hover {
+            transform: scale(1.05);
+        }
+        .ai-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            list-style: none;
+        }
+        .ai-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .ai-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .ai-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        .ai-item:hover::before {
+            transform: scaleX(1);
+        }
+        .ai-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            background: #f0f0f0;
+        }
+        .ai-item:hover .ai-logo {
+            transform: scale(1.1);
+        }
+        .ai-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .ai-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        .ai-pricing {
+            font-size: 0.9rem;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        .ai-category {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Background colors for categories */
+        .assistants { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+        .image { background: linear-gradient(135deg, #fff3e0, #ffcc80); }
+        .video { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+        .coding { background: linear-gradient(135deg, #e8f5e8, #c8e6c9); }
+        .writing { background: linear-gradient(135deg, #f1f8e9, #dcedc8); }
+        .search { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+        .design { background: linear-gradient(135deg, #fce4ec, #f8bbd9); }
+        .research { background: linear-gradient(135deg, #f5f5f5, #eeeeee); }
+        .meeting { background: linear-gradient(135deg, #fff8e1, #ffecb3); }
+        .automation { background: linear-gradient(135deg, #e1f5fe, #b3e5fc); }
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            font-size: 1rem;
+            margin-top: 2rem;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #4ecdc4;
+        }
+        .github-logo {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            .ai-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            footer {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Inteligências Artificiais em 2025</h1>
+    <p class="subtitle">Descubra as principais IAs gratuitas e pagas para diversas aplicações</p>
+</header>
+<div class="container">
+    <input type="text" class="search-box" id="searchInput" placeholder="Busque por nome da IA...">
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="free">Gratuitas</button>
+        <button class="filter-btn" data-filter="paid">Pagas</button>
+        <button class="filter-btn" data-filter="assistants">Assistentes</button>
+        <button class="filter-btn" data-filter="image">Geração de Imagens</button>
+        <button class="filter-btn" data-filter="video">Geração de Vídeos</button>
+        <button class="filter-btn" data-filter="coding">Codificação</button>
+        <button class="filter-btn" data-filter="writing">Escrita</button>
+        <button class="filter-btn" data-filter="search">Busca</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+        <button class="filter-btn" data-filter="research">Pesquisa</button>
+        <button class="filter-btn" data-filter="meeting">Reuniões</button>
+        <button class="filter-btn" data-filter="automation">Automação</button>
+    </div>
+    <ul class="ai-list" id="aiList">
+        <!-- ChatGPT -->
+        <li class="ai-item assistants" data-type="free" data-category="assistants" data-url="https://chatgpt.com/">
+            <img src="https://www.hatchwise.com/wp-content/uploads/2024/05/image-27-1024x569.png" alt="ChatGPT Logo" class="ai-logo">
+            <div class="ai-category">Assistentes</div>
+            <div class="ai-name">ChatGPT</div>
+            <div class="ai-description">Ideal para tarefas diárias pessoais e profissionais, como análise de PDFs, planilhas, extração de dados, geração de ideias, resumos de reuniões e insights a partir de dados de surveys ou relatórios.</div>
+            <div class="ai-pricing">Freemium (tier gratuito com limites; Plus $20/mês)</div>
+        </li>
+        <!-- Grok -->
+        <li class="ai-item assistants" data-type="paid" data-category="assistants" data-url="https://grok.com/">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Logo_Grok_AI_%28xAI%29_2025.png" alt="Grok Logo" class="ai-logo">
+            <div class="ai-category">Assistentes</div>
+            <div class="ai-name">Grok</div>
+            <div class="ai-description">Perfeito para respostas intuitivas e verificação de fatos em tempo real via integração com X, modos avançados como 'Think' e 'Deep Search', e geração de imagens sem censura para memes e conteúdo criativo.</div>
+            <div class="ai-pricing">Paga (via tiers do X Premium)</div>
+        </li>
+        <!-- Claude -->
+        <li class="ai-item assistants" data-type="free" data-category="assistants" data-url="https://claude.ai/">
+            <img src="https://claude.ai/images/claude_ogimage.png" alt="Claude Logo" class="ai-logo">
+            <div class="ai-category">Assistentes</div>
+            <div class="ai-name">Claude</div>
+            <div class="ai-description">Excelente para escrita ética, geração de código limpo e documentado, explicações claras de conceitos complexos, e resolução colaborativa de problemas para equipes de desenvolvimento.</div>
+            <div class="ai-pricing">Freemium (gratuito; Pro $20/mês)</div>
+        </li>
+        <!-- Gemini -->
+        <li class="ai-item assistants" data-type="free" data-category="assistants" data-url="https://gemini.google.com/">
+            <img src="https://www.gstatic.com/lamda/images/gemini_aurora_thumbnail_4g_e74822ff0ca4259beb718.png" alt="Gemini Logo" class="ai-logo">
+            <div class="ai-category">Assistentes</div>
+            <div class="ai-name">Gemini</div>
+            <div class="ai-description">Ótimo para análise de documentos longos como papers acadêmicos, integração com Google Workspace, geração de resumos em áudio no formato podcast, e suporte a tarefas de produtividade.</div>
+            <div class="ai-pricing">Freemium (gratuito básico; Pro $19.99/mês)</div>
+        </li>
+        <!-- Perplexity -->
+        <li class="ai-item search" data-type="free" data-category="search" data-url="https://www.perplexity.ai/">
+            <img src="https://logo.clearbit.com/perplexity.ai" alt="Perplexity Logo" class="ai-logo">
+            <div class="ai-category">Busca</div>
+            <div class="ai-name">Perplexity AI</div>
+            <div class="ai-description">Melhor para pesquisas rápidas com fontes citadas, síntese de tópicos complexos, verificação de informações em tempo real, e respostas detalhadas para perguntas acadêmicas ou profissionais.</div>
+            <div class="ai-pricing">Freemium (Pro para pesquisa avançada)</div>
+        </li>
+        <!-- Microsoft Copilot -->
+        <li class="ai-item assistants" data-type="paid" data-category="assistants" data-url="https://copilot.microsoft.com/">
+            <img src="https://logo.clearbit.com/copilot.microsoft.com" alt="Copilot Logo" class="ai-logo">
+            <div class="ai-category">Assistentes</div>
+            <div class="ai-name">Microsoft Copilot</div>
+            <div class="ai-description">Ideal para produtividade no ecossistema Microsoft, automação de tarefas no Office, Windows e Teams, geração de relatórios, e suporte a colaboração em tempo real.</div>
+            <div class="ai-pricing">Paga (via Microsoft 365)</div>
+        </li>
+        <!-- DALL-E -->
+        <li class="ai-item image" data-type="paid" data-category="image" data-url="https://openai.com/dall-e-3">
+            <img src="https://logo.clearbit.com/openai.com" alt="DALL-E Logo" class="ai-logo">
+            <div class="ai-category">Geração de Imagens</div>
+            <div class="ai-name">DALL-E 3</div>
+            <div class="ai-description">Geração de imagens realistas e criativas a partir de prompts, transformações imagem-para-imagem, e criação de conteúdo visual royalty-free para blogs, redes sociais e marketing.</div>
+            <div class="ai-pricing">Paga (via ChatGPT Plus)</div>
+        </li>
+        <!-- Midjourney -->
+        <li class="ai-item image" data-type="paid" data-category="image" data-url="https://www.midjourney.com/">
+            <img src="https://logo.clearbit.com/midjourney.com" alt="Midjourney Logo" class="ai-logo">
+            <div class="ai-category">Geração de Imagens</div>
+            <div class="ai-name">Midjourney</div>
+            <div class="ai-description">Criação de arte conceitual de alta qualidade, imagens com estética pictórica, ideal para artistas, designers e criadores de conteúdo para jogos, filmes e campanhas visuais.</div>
+            <div class="ai-pricing">Paga ($10/mês básico)</div>
+        </li>
+        <!-- Stable Diffusion -->
+        <li class="ai-item image" data-type="free" data-category="image" data-url="https://stability.ai/stable-diffusion">
+            <img src="https://logo.clearbit.com/stability.ai" alt="Stable Diffusion Logo" class="ai-logo">
+            <div class="ai-category">Geração de Imagens</div>
+            <div class="ai-name">Stable Diffusion</div>
+            <div class="ai-description">Geração open-source de imagens personalizáveis, ideal para experimentos locais, integração em pipelines de desenvolvimento, e criação de visuais para projetos técnicos.</div>
+            <div class="ai-pricing">Gratuita (open-source)</div>
+        </li>
+        <!-- Synthesia -->
+        <li class="ai-item video" data-type="paid" data-category="video" data-url="https://www.synthesia.io/">
+            <img src="https://logo.clearbit.com/synthesia.io" alt="Synthesia Logo" class="ai-logo">
+            <div class="ai-category">Geração de Vídeos</div>
+            <div class="ai-name">Synthesia</div>
+            <div class="ai-description">Criação de vídeos com avatares humanos realistas a partir de texto, ideal para treinamentos corporativos, vídeos de onboarding, apresentações e campanhas de marketing personalizado.</div>
+            <div class="ai-pricing">Freemium ($29/mês)</div>
+        </li>
+        <!-- Google Veo -->
+        <li class="ai-item video" data-type="paid" data-category="video" data-url="https://deepmind.google/models/veo/">
+            <img src="https://logo.clearbit.com/deepmind.google" alt="Veo Logo" class="ai-logo">
+            <div class="ai-category">Geração de Vídeos</div>
+            <div class="ai-name">Google Veo</div>
+            <div class="ai-description">Geração de vídeos criativos com áudio sincronizado, ideal para b-roll em redes sociais, storytelling visual, e conteúdo dinâmico para campanhas de marketing.</div>
+            <div class="ai-pricing">Paga (via Google AI Pro $19.99/mês)</div>
+        </li>
+        <!-- OpusClip -->
+        <li class="ai-item video" data-type="free" data-category="video" data-url="https://www.opus.pro/">
+            <img src="https://logo.clearbit.com/opus.pro" alt="OpusClip Logo" class="ai-logo">
+            <div class="ai-category">Geração de Vídeos</div>
+            <div class="ai-name">OpusClip</div>
+            <div class="ai-description">Transformação de vídeos longos em clipes curtos para redes sociais, com adição automática de legendas, emojis, e detecção de momentos virais para TikTok e Instagram.</div>
+            <div class="ai-pricing">Freemium</div>
+        </li>
+        <!-- GitHub Copilot -->
+        <li class="ai-item coding" data-type="paid" data-category="coding" data-url="https://github.com/features/copilot">
+            <img src="https://logo.clearbit.com/github.com" alt="GitHub Copilot Logo" class="ai-logo">
+            <div class="ai-category">Codificação</div>
+            <div class="ai-name">GitHub Copilot</div>
+            <div class="ai-description">Assistência em tempo real para codificação, sugestões de código, depuração, e completamento automático em linguagens como Python, JavaScript e Java, integrado ao VS Code.</div>
+            <div class="ai-pricing">Paga ($10/mês)</div>
+        </li>
+        <!-- Cursor -->
+        <li class="ai-item coding" data-type="paid" data-category="coding" data-url="https://cursor.sh/">
+            <img src="https://logo.clearbit.com/cursor.sh" alt="Cursor Logo" class="ai-logo">
+            <div class="ai-category">Codificação</div>
+            <div class="ai-name">Cursor</div>
+            <div class="ai-description">IDE nativa com IA para programação, oferecendo chat contextual, geração de código, edição avançada, e suporte a projetos complexos com múltiplos arquivos.</div>
+            <div class="ai-pricing">Paga ($20/mês)</div>
+        </li>
+        <!-- Tabnine -->
+        <li class="ai-item coding" data-type="free" data-category="coding" data-url="https://www.tabnine.com/">
+            <img src="https://logo.clearbit.com/tabnine.com" alt="Tabnine Logo" class="ai-logo">
+            <div class="ai-category">Codificação</div>
+            <div class="ai-name">Tabnine</div>
+            <div class="ai-description">Autocompletar de código com suporte a múltiplas linguagens, execução local para privacidade, e integração com IDEs populares como IntelliJ e VS Code.</div>
+            <div class="ai-pricing">Freemium</div>
+        </li>
+        <!-- Canva Magic Studio -->
+        <li class="ai-item design" data-type="free" data-category="design" data-url="https://www.canva.com/pt_br/gerador-imagem-ia/">
+            <img src="https://logo.clearbit.com/canva.com" alt="Canva Logo" class="ai-logo">
+            <div class="ai-category">Design</div>
+            <div class="ai-name">Canva Magic Studio</div>
+            <div class="ai-description">Criação de templates personalizados, edição de imagens com remoção de fundo, adição de animações, e geração de designs para posts, apresentações e materiais de marketing.</div>
+            <div class="ai-pricing">Freemium</div>
+        </li>
+        <!-- Rytr -->
+        <li class="ai-item writing" data-type="paid" data-category="writing" data-url="https://rytr.me/">
+            <img src="https://logo.clearbit.com/rytr.me" alt="Rytr Logo" class="ai-logo">
+            <div class="ai-category">Escrita</div>
+            <div class="ai-name">Rytr</div>
+            <div class="ai-description">Geração rápida de conteúdo curto, como posts para redes sociais, descrições de produtos, emails de marketing, com suporte a 30+ idiomas e verificação de plágio integrada.</div>
+            <div class="ai-pricing">Paga ($9/mês)</div>
+        </li>
+        <!-- Sudowrite -->
+        <li class="ai-item writing" data-type="paid" data-category="writing" data-url="https://sudowrite.com/">
+            <img src="https://logo.clearbit.com/sudowrite.com" alt="Sudowrite Logo" class="ai-logo">
+            <div class="ai-category">Escrita</div>
+            <div class="ai-name">Sudowrite</div>
+            <div class="ai-description">Escrita criativa para ficção, superação de bloqueio criativo, geração de ideias para plots, descrições vívidas, diálogos realistas, e revisão de manuscritos.</div>
+            <div class="ai-pricing">Paga ($19/mês)</div>
+        </li>
+        <!-- NotebookLM -->
+        <li class="ai-item research" data-type="free" data-category="research" data-url="https://notebooklm.google/">
+            <img src="https://logo.clearbit.com/notebooklm.google" alt="NotebookLM Logo" class="ai-logo">
+            <div class="ai-category">Pesquisa</div>
+            <div class="ai-name">NotebookLM</div>
+            <div class="ai-description">Organização de notas e materiais de curso, sumarização de documentos extensos, geração de áudio em formato podcast para estudo, e suporte a revisões acadêmicas.</div>
+            <div class="ai-pricing">Gratuito (Premium $19.99/mês)</div>
+        </li>
+        <!-- Fathom -->
+        <li class="ai-item meeting" data-type="free" data-category="meeting" data-url="https://www.fathom.video/">
+            <img src="https://logo.clearbit.com/fathom.video" alt="Fathom Logo" class="ai-logo">
+            <div class="ai-category">Reuniões</div>
+            <div class="ai-name">Fathom</div>
+            <div class="ai-description">Gravação e transcrição de reuniões no Zoom, Teams ou Meet, com resumos estruturados, rastreamento de ações, e integração com CRMs para equipes.</div>
+            <div class="ai-pricing">Freemium ($19/mês premium)</div>
+        </li>
+        <!-- Grammarly -->
+        <li class="ai-item writing" data-type="free" data-category="writing" data-url="https://www.grammarly.com/">
+            <img src="https://logo.clearbit.com/grammarly.com" alt="Grammarly Logo" class="ai-logo">
+            <div class="ai-category">Escrita</div>
+            <div class="ai-name">Grammarly</div>
+            <div class="ai-description">Correção gramatical, sugestões de estilo, tom e clareza, ideal para emails profissionais, relatórios, e escrita acadêmica em inglês.</div>
+            <div class="ai-pricing">Freemium ($12/mês premium)</div>
+        </li>
+        <!-- Jasper -->
+        <li class="ai-item writing" data-type="paid" data-category="writing" data-url="https://www.jasper.ai/">
+            <img src="https://logo.clearbit.com/jasper.ai" alt="Jasper Logo" class="ai-logo">
+            <div class="ai-category">Escrita</div>
+            <div class="ai-name">Jasper</div>
+            <div class="ai-description">Geração de conteúdo de marketing, como textos para anúncios, blogs, e campanhas de SEO, com ferramentas para equipes e integração com plataformas de publicação.</div>
+            <div class="ai-pricing">Paga ($39/mês)</div>
+        </li>
+        <!-- Leonardo AI -->
+        <li class="ai-item design" data-type="free" data-category="design" data-url="https://leonardo.ai/">
+            <img src="https://logo.clearbit.com/leonardo.ai" alt="Leonardo AI Logo" class="ai-logo">
+            <div class="ai-category">Design</div>
+            <div class="ai-name">Leonardo AI</div>
+            <div class="ai-description">Criação de assets para jogos, ilustrações, e designs estilizados, com opções de personalização de modelos e geração de texturas 3D.</div>
+            <div class="ai-pricing">Freemium (150 gerações/dia gratuitas)</div>
+        </li>
+        <!-- Fireflies.ai -->
+        <li class="ai-item meeting" data-type="free" data-category="meeting" data-url="https://fireflies.ai/">
+            <img src="https://logo.clearbit.com/fireflies.ai" alt="Fireflies Logo" class="ai-logo">
+            <div class="ai-category">Reuniões</div>
+            <div class="ai-name">Fireflies.ai</div>
+            <div class="ai-description">Transcrição automática de reuniões, análise de sentimentos, resumos de tópicos discutidos, e integração com Zoom, Teams, e CRMs para equipes remotas.</div>
+            <div class="ai-pricing">Freemium ($10/mês premium)</div>
+        </li>
+    </ul>
+</div>
+<footer>
+    <p>Desenvolvido por <a href="https://github.com/arlindovs" target="_blank">
+        ArlindoVS
+    </a></p>
+</footer>
+<script>
+    // Busca
+    const searchInput = document.getElementById('searchInput');
+    const aiItems = document.querySelectorAll('.ai-item');
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        aiItems.forEach(item => {
+            const name = item.querySelector('.ai-name').textContent.toLowerCase();
+            item.style.display = name.includes(query) ? 'block' : 'none';
+        });
+    });
+
+    // Filtros por tipo e categoria
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            aiItems.forEach(item => {
+                let show = false;
+                if (filter === 'all') {
+                    show = true;
+                } else if (filter === 'free' || filter === 'paid') {
+                    show = item.dataset.type === filter;
+                } else {
+                    show = item.dataset.category === filter;
+                }
+                item.classList.toggle('hidden', !show);
+            });
+        });
+    });
+
+    // Link on click
+    aiItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (!e.target.tagName.match(/INPUT|BUTTON/)) {
+                const url = item.dataset.url;
+                if (url) window.open(url, '_blank');
+            }
+        });
+    });
+</script>
+</body>
+</html>
